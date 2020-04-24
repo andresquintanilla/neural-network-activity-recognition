@@ -10,11 +10,17 @@ Recently, deep learning methods such as recurrent neural networks and convolutio
 
 ## Convolutional Neural Networks
 
+A convolutional neural network consists of an input and an output layer, as well as multiple hidden layers. The hidden layers of a CNN typically consist of a series of convolutional layers that convolve with a multiplication or other dot product. The activation function is commonly a RELU layer, and is subsequently followed by additional convolutions such as pooling layers, fully connected layers and normalization layers, referred to as hidden layers because their inputs and outputs are masked by the activation function and final convolution.
+
+Though the layers are colloquially referred to as convolutions, this is only by convention. Mathematically, it is technically a sliding dot product or cross-correlation. This has significance for the indices in the matrix, in that it affects how weight is determined at a specific index point.
+
+## Approach
+
 In this experiment we would focus on analysing human activity raw data from a Fitbit smart watch.
 
 For this initial approach, the data was collected at a frequency of 10Hz (~10 samples per second) and includes triaxial acelerometer and gyroscope measurements for a single user.
 
-Moving forward this experiment introduces exploratory data analysis to understand the data and its limitations. Starting with a principal component analysis, following by spliting or breaking down the data into 'window frames' and finaly building and training a convolutional neural network.
+Also, this experiment introduces exploratory data analysis to understand the data and its limitations. Starting with a principal component analysis, following by spliting or breaking down the data into 'window frames' and finaly building and training a convolutional neural network.
 
 ![Fitbit Approach](./media/fitbit.png)
 
