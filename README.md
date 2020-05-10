@@ -21,6 +21,11 @@ Ten acitivities ('Walking','Upstairs','Downstairs','Running','Standing','Sitting
 
 These data signals are sampled at 10Hz and segmented by taking a sliding window frames of 1 second each. The data was labeled, and randomly partitioned into two sub-sets, 70% for the training data and 30% the test data.
 
+Azure IoT Hub solution was used to enable highly secure and reliable communication between an IoT application and the smart devices. The incoming messages were managed and routes to a Storage account via the IoT Hub connection.
+
+![Azure IoT Hub](./media/iot.png)
+
+
 ## Approach
 
 This project conducts a brief exploratory data analysis to better understand the raw data and its limitations. Starting with a principal component analysis, followed by spliting the dataset into 'window frames' to visualy categorize different activities and finaly building a convolutional neural network.
