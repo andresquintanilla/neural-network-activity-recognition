@@ -21,7 +21,7 @@ Ten acitivities ('Walking','Upstairs','Downstairs','Running','Standing','Sitting
 
 These data signals are sampled at 10Hz and segmented by taking a sliding window frames of 1 second each. The data was labeled, and randomly partitioned into two sub-sets, 70% for the training data and 30% the test data.
 
-Azure IoT Hub solution was used to enable highly secure and reliable communication between an IoT application and the smart devices. The incoming messages were managed and routes to a Storage account via the IoT Hub connection.
+[Azure IoT Hub](https://azure.microsoft.com/en-us/services/iot-hub/) solution was used to enable highly secure and reliable communication between an IoT application and the smart device. The incoming messages were managed and routed to a Storage account via the IoT Hub connection (see the diagram bellow).
 
 ![Azure IoT Hub](./media/iot.png)
 
