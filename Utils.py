@@ -9,9 +9,10 @@ Created on Wed Nov 20 20:47:23 2019
 import os
 import tarfile
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, roc_curve, auc
 
 def make_tardir(path, tar_name):
     with tarfile.open(tar_name, "w:gz") as tar_handle:
@@ -154,6 +155,47 @@ def plot_confusion_matrix(y_true, y_pred, classes, cmap=plt.cm.Blues, normalize=
             ax.text(j, i, format(cm[i, j], fmt), ha="center", va="center",
                     color="white" if cm[i, j] > thresh else "black",fontsize=20)
     fig.tight_layout()
+
+    #plt.show()
+    
+    return plt
+
+
+"""
+This function prints and plots the ROC curve.
+"""
+def plot_roc_curve(y_true, y_pred, classes, figsize_i=(10,10)):
+    n_classes = np.unique(y_true).max()+1
+    y_true = pd.get_dummies(y_true).to_numpy()
+    # Compute ROC curve and ROC area for each class
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(y_true[:, i], y_pred[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+    
+    # Compute micro-average ROC curve and ROC area
+    fpr["micro"], tpr["micro"], _ = roc_curve(y_true.ravel(), y_pred[:,:10].ravel())
+    roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
+    
+    # Plot ROC curve
+    plt.figure(figsize=figsize_i)
+    plt.plot(fpr["micro"], tpr["micro"],
+             label='Micro-average ROC curve (AUC = {0:0.2f})'
+                   ''.format(roc_auc["micro"]))
+    for i in range(n_classes):
+        plt.plot(fpr[i], tpr[i], label='ROC curve of class {0} (AUC = {1:0.2f})'''.format(classes[i], roc_auc[i]))
+    
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xlabel('False Positive Rate',fontsize=25)
+    plt.ylabel('True Positive Rate',fontsize=25)
+    plt.title('Receiver Operating Characteristic (ROC)',fontsize=25)
+    plt.legend(loc="lower right", bbox_to_anchor=(1.4, 0),fontsize=15)
 
     #plt.show()
     
